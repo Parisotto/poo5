@@ -6,7 +6,7 @@ Crie um projeto de aplicação WEB de um QUIZ (tema livre) com 10 questões alea
 - O projeto deve ser apresentado em vídeo, cujo link deverá ser submetido pelo link:
 https://goo.gl/forms/5FLBD95SkQx2DgRY2 até quarta-feira, 16 de novembro de 2016
 
-# São participantes deste Ggrupo 2:
+# São participantes deste Grupo 2:
 - Edson Luiz Parisotto
 - Fabrício Santos Guimarães
 - Pedro Henrique
