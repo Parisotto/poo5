@@ -1,68 +1,69 @@
-<%-- 
-    Document   : test
-    Created on : 09/11/2016, 21:29:30
-    Author     : Parisotto
---%>
-
+<%@page import="java.util.Collections"%>
+<%@page import="quiz.Usuario"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="quiz.Question"%>
 <%@page import="quiz.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    int idUsuario;
     if(request.getParameter("test") != null){
-        Quiz.validateTest(
-            new String[]{
-                request.getParameter("0"), 
-                request.getParameter("1"), 
-                request.getParameter("2"), 
-                request.getParameter("3") 
+        int[] respostas = new int[5];
+        for(int i=0; i<5; i++){
+            if(request.getParameter(Integer.toString(i)) != null){
+                respostas[i] = Integer.parseInt(request.getParameter(Integer.toString(i)));
+            } else {
+                respostas[i] = -1;
             }
-        );
+        }
+        Quiz.validateTest(respostas);
         response.sendRedirect("index.jsp");
-    }
+    } else {
+        if(request.getParameter("usuario") != null){
+            if(request.getParameter("usuario") != ""){
+                Quiz.setUsu(request.getParameter("usuario"));
+            } else {
+                Quiz.setUsu("Anônimo");
+            }
+        } else {
+            Quiz.setUsu("Anônimo");
+        }
 %>
 <html>
     <head>
         <title>Teste: WebQuiz</title>
         <meta charset="UTF-8">
 
-        <style>
-            body{
-                width:600px;
-                margin:20px auto;
-                background: #eee;
-                border:1px solid #eee;
-                padding: 50px;
-                border-radius: 8px;
-                box-sizing: border-box;
-                box-shadow: 0 0 8px #999;
-            }
-        </style>
+        <link rel="stylesheet" href="css/estilo.css">
     </head>
     <body>
-        <h1>WebQuiz!</h1>
+        <h1>WebQuiz! <span><%= Quiz.getUsu(Quiz.getUsuAtual()) %></span></h1>
         <h2>Teste</h2>
         <hr>
         <form>
 <%
-    ArrayList<Question> test = Quiz.getTest();
-    for(Question q: test){
+        ArrayList<Question> test = Quiz.getTest();
+        Collections.shuffle(test);
+        int i = 1;
+        for(Question q: test){
 %>
-            <h4><%= q.getQuestion() %></h4>
+            <h4><%= i++ %>) <%= q.getQuestion() %></h4>
 <%
-        int i = 0;
-        for(String alternative: q.getAlternatives()){
+            int j = 0;
+            for(String alternative: q.getAlternatives()){
 %>
-            <input type="radio" name="<%= test.indexOf(q) %>" value="<%= i++ %>"> <%= alternative %><br>
+            <input type="radio" name="<%= test.indexOf(q) %>" value="<%= j++ %>"> <%= alternative %><br>
 <%
-        }
+            }
 %>
             <hr>
 <%
-    }
+        }
 %>
             <input type="submit" name="test" value="Concluir">
         </form>
     </body>
 </html>
+<%
+    }
+%>
