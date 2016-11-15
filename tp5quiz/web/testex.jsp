@@ -48,15 +48,17 @@
         int i = 1;
         for(Question q: test){
 %>
-            <h3><%= i++ %>) <%= q.getQuestion() %></h3>
+            <fieldset>
+                <legend><%= i++ %>) <%= q.getQuestion() %></legend>
 <%
             int j = 0;
             for(String alternative: q.getAlternatives()){
 %>
-            <label><input type="radio" name="<%= test.indexOf(q) %>" value="<%= j++ %>"><%= alternative %></label>
+            <input type="radio" id="<%= test.indexOf(q) %><%= j %>" name="<%= test.indexOf(q) %>" value="<%= j %>"><label for="<%= test.indexOf(q) %><%= j++ %>"><%= alternative %></label>
 <%
             }
 %>
+            </fieldset>
             <hr>
 <%
         }
