@@ -37,22 +37,23 @@
         <link rel="stylesheet" href="css/estilo.css">
     </head>
     <body>
-        <h1>WebQuiz! <span><%= Quiz.getUsu(Quiz.getUsuAtual()) %></span></h1>
-        <h2>Teste</h2>
-        <hr>
-        <form>
+        <main>
+            <div> 
+                <h1>Web Quiz POO</h1>
+        <h2><%= Quiz.getUsu(Quiz.getUsuAtual()) %></h2>
+        <form id="teste">
 <%
         ArrayList<Question> test = Quiz.getTest();
         Collections.shuffle(test);
         int i = 1;
         for(Question q: test){
 %>
-            <h4><%= i++ %>) <%= q.getQuestion() %></h4>
+            <h3><%= i++ %>) <%= q.getQuestion() %></h3>
 <%
             int j = 0;
             for(String alternative: q.getAlternatives()){
 %>
-            <input type="radio" name="<%= test.indexOf(q) %>" value="<%= j++ %>"> <%= alternative %><br>
+            <label><input type="radio" name="<%= test.indexOf(q) %>" value="<%= j++ %>"><%= alternative %></label>
 <%
             }
 %>
@@ -62,6 +63,8 @@
 %>
             <input type="submit" name="test" value="Concluir">
         </form>
+        </div>
+        </main>
     </body>
 </html>
 <%
