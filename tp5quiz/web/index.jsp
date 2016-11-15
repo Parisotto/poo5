@@ -10,13 +10,16 @@
         <link rel="stylesheet" href="css/estilo.css">
     </head>
     <body>
+        <main>
+            <div>
+                <h1>Web Quiz POO</h1>
 <%
     if(Quiz.getUsuAtual() > -1){
-        String usuario = Quiz.getUsu(Quiz.getUsuAtual());
+        double db1 = 100 * Quiz.getLastGrade(Quiz.getUsuAtual());
+        double db2 = 100 * Quiz.getGradeAvarege(Quiz.getUsuAtual());
 %>
-        <h1>QUIZ! <span><%= usuario %></span></h1>
-        <p>Última nota: <%= 100.0 * Quiz.getLastGrade(Quiz.getUsuAtual()) %>%</p>
-        <p>Média: <%= 100 * Quiz.getGradeAvarege(Quiz.getUsuAtual()) %>%</p>
+        <h2><%= Quiz.getUsu(Quiz.getUsuAtual()) %></h2>
+        <p>Última nota: <strong><%= String.format("%.0f", db1) %></strong> - Média: <strong><%= String.format("%.0f", db2) %></strong></p>
         <hr>
         <table>
             <tr>
@@ -28,14 +31,14 @@
 <%
         ArrayList<Usuario> usuarios = Quiz.getUsuList();
         for(Usuario u: usuarios){
-            double db1 = 100.0 * u.getLastGrade();
-            double db2 = 100.0 * Quiz.getGradeAvarege(u.getId());
+            db1 = 100 * u.getLastGrade();
+            db2 = 100 * Quiz.getGradeAvarege(u.getId());
 %>        
-            <tr>
+            <tr<% if(Quiz.getUsuAtual()==u.getId()){%> class="usu-atual"<% } %>>
                 <td><%= u.getId() %></td>
                 <td><%= u.getUsuario() %></td>
-                <td><%= String.format( "%.1f", db1) %></td>
-                <td><%= String.format( "%.1f", db2) %>%</td>
+                <td><%= String.format("%.0f", db1) %></td>
+                <td><%= String.format("%.0f", db2) %></td>
             </tr>
 <%
         }
@@ -43,8 +46,10 @@
 %>
         </table>
         <form method="get" action="testex.jsp">
-            <input type="text" placeholder="Nome" name="usuario" value=""><br>
-            <input type="submit" value="Inicar Teste">
+            <input type="text" autofocus placeholder="Nome" name="usuario" value="">
+            <input type="submit" value="Teste">
         </form>
+        </div>
+        </main>
     </body>
 </html>
