@@ -10,7 +10,15 @@
         <link rel="stylesheet" href="css/estilo.css">
     </head>
     <body>
-        <main>
+<% 
+    boolean centrar = true;
+    if(Quiz.getUsuAtual() > -1){
+        if(Quiz.getUsuList().size() > 4){
+            centrar = false;
+        }
+    } 
+%>        
+        <main<% if(centrar){%> class="centrar"<%}%>>
             <div>
                 <h1>Web Quiz POO</h1>
 <%
