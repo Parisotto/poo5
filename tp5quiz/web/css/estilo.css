@@ -155,7 +155,7 @@ label:before {
 }
 input:checked + label:before {
     border: 3px solid rgb(40,163,197);
-    background-color: darkblue;
+    background-color: white;
 }
 label:hover:before{
     background-color:greenyellow;
