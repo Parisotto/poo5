@@ -8,8 +8,8 @@
 <%
     int idUsuario;
     if(request.getParameter("test") != null){
-        int[] respostas = new int[5];
-        for(int i=0; i<5; i++){
+        int[] respostas = new int[Quiz.getTest().size()];
+        for(int i=0; i < respostas.length; i++){
             if(request.getParameter(Integer.toString(i)) != null){
                 respostas[i] = Integer.parseInt(request.getParameter(Integer.toString(i)));
             } else {
@@ -41,6 +41,7 @@
             <div> 
                 <h1>Web Quiz POO</h1>
         <h2><%= Quiz.getUsu(Quiz.getUsuAtual()) %></h2>
+        <h3>A Ditatura Militar no Brasil 1964-1985</h3>
         <form id="teste">
 <%
         ArrayList<Question> test = Quiz.getTest();
